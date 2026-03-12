@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Calendar, Clock, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Calendar,
+  Clock,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getColombiaTime } from "@/services/libs/Dateutils";
 
@@ -41,8 +47,18 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   const months = [
-    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
   ];
 
   const weekDays = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
@@ -61,7 +77,10 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -88,10 +107,10 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
 
   const formatISOValue = (date: Date) => {
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
 
     return `${year}-${month}-${day}T${hours}:${minutes}:00`;
   };
@@ -192,11 +211,11 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
         >
           <ChevronLeft size={20} />
         </button>
-        
+
         <h3 className="text-lg font-semibold">
           {months[currentMonth.getMonth()]} {currentMonth.getFullYear()}
         </h3>
-        
+
         <button
           type="button"
           onClick={() => navigateMonth("next")}
@@ -227,17 +246,20 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
             onClick={() => handleDateClick(date)}
             className={`
               h-10 w-10 flex items-center justify-center text-sm rounded-md transition-all
-              ${!isCurrentMonth 
-                ? "text-text-muted hover:bg-bg-tertiary" 
-                : "text-text-primary hover:bg-blue-50 dark:hover:bg-blue-900/20"
+              ${
+                !isCurrentMonth
+                  ? "text-text-muted hover:bg-bg-tertiary"
+                  : "text-text-primary hover:bg-blue-50 dark:hover:bg-blue-900/20"
               }
-              ${isSelected(date) 
-                ? "bg-blue-600 text-white hover:bg-blue-700" 
-                : ""
+              ${
+                isSelected(date)
+                  ? "bg-blue-600 text-white hover:bg-blue-700"
+                  : ""
               }
-              ${isToday(date) && !isSelected(date) 
-                ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300" 
-                : ""
+              ${
+                isToday(date) && !isSelected(date)
+                  ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                  : ""
               }
             `}
           >
@@ -260,22 +282,24 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
             <button
               type="button"
               onClick={() => {
-                const newHour = tempDate.getHours() === 23 ? 0 : tempDate.getHours() + 1;
+                const newHour =
+                  tempDate.getHours() === 23 ? 0 : tempDate.getHours() + 1;
                 handleTimeChange("hour", newHour);
               }}
               className="p-1 rounded-md hover:bg-bg-tertiary transition-colors"
             >
               <ChevronUp size={16} />
             </button>
-            
+
             <div className="w-16 h-12 flex items-center justify-center bg-bg-tertiary rounded-md text-lg font-mono">
               {String(tempDate.getHours()).padStart(2, "0")}
             </div>
-            
+
             <button
               type="button"
               onClick={() => {
-                const newHour = tempDate.getHours() === 0 ? 23 : tempDate.getHours() - 1;
+                const newHour =
+                  tempDate.getHours() === 0 ? 23 : tempDate.getHours() - 1;
                 handleTimeChange("hour", newHour);
               }}
               className="p-1 rounded-md hover:bg-bg-tertiary transition-colors"
@@ -296,22 +320,24 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
             <button
               type="button"
               onClick={() => {
-                const newMinute = tempDate.getMinutes() === 59 ? 0 : tempDate.getMinutes() + 1;
+                const newMinute =
+                  tempDate.getMinutes() === 59 ? 0 : tempDate.getMinutes() + 1;
                 handleTimeChange("minute", newMinute);
               }}
               className="p-1 rounded-md hover:bg-bg-tertiary transition-colors"
             >
               <ChevronUp size={16} />
             </button>
-            
+
             <div className="w-16 h-12 flex items-center justify-center bg-bg-tertiary rounded-md text-lg font-mono">
               {String(tempDate.getMinutes()).padStart(2, "0")}
             </div>
-            
+
             <button
               type="button"
               onClick={() => {
-                const newMinute = tempDate.getMinutes() === 0 ? 59 : tempDate.getMinutes() - 1;
+                const newMinute =
+                  tempDate.getMinutes() === 0 ? 59 : tempDate.getMinutes() - 1;
                 handleTimeChange("minute", newMinute);
               }}
               className="p-1 rounded-md hover:bg-bg-tertiary transition-colors"
@@ -324,19 +350,18 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
 
       {/* Botones rápidos para tiempo */}
       <div className="mt-6 flex flex-wrap gap-2 justify-center">
-        {[
-          { label: "Ahora", action: () => setTempDate(getColombiaTime()) },
-
-        ].map((btn) => (
-          <button
-            key={btn.label}
-            type="button"
-            onClick={btn.action}
-            className="px-3 py-1 text-sm rounded-md bg-bg-secondary hover:bg-bg-tertiary  transition-colors"
-          >
-            {btn.label}
-          </button>
-        ))}
+        {[{ label: "Ahora", action: () => setTempDate(getColombiaTime()) }].map(
+          (btn) => (
+            <button
+              key={btn.label}
+              type="button"
+              onClick={btn.action}
+              className="px-3 py-1 text-sm rounded-md bg-bg-secondary hover:bg-bg-tertiary  transition-colors"
+            >
+              {btn.label}
+            </button>
+          ),
+        )}
       </div>
     </div>
   );
@@ -348,7 +373,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
           {label}
         </label>
       )}
-      
+
       <button
         type="button"
         onClick={() => !disabled && setIsOpen(!isOpen)}
@@ -356,13 +381,15 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
         className={`
           w-full px-3 py-2 border rounded-lg text-left flex items-center justify-between
           transition-colors duration-200
-          ${disabled 
-            ? "bg-bg-secondary text-text-muted cursor-not-allowed" 
-            : "bg-bg-tertiary hover:bg-bg-secondary  cursor-pointer"
+          ${
+            disabled
+              ? "bg-bg-secondary text-text-muted cursor-not-allowed"
+              : "bg-bg-tertiary hover:bg-bg-secondary  cursor-pointer"
           }
-          ${error 
-            ? "border-red-300 dark:border-red-600" 
-            : "border-border-primary focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+          ${
+            error
+              ? "border-red-300 dark:border-red-600"
+              : "border-border-primary focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
           }
         `}
       >
@@ -372,11 +399,11 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
             {value ? formatDisplayValue(selectedDate) : placeholder}
           </span>
         </div>
-        <ChevronDown 
-          size={16} 
+        <ChevronDown
+          size={16}
           className={`text-text-muted transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
-          }`} 
+          }`}
         />
       </button>
 
@@ -457,7 +484,10 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
 };
 
 // Componente ChevronUp que faltaba
-const ChevronUp: React.FC<{ size: number; className?: string }> = ({ size, className = "" }) => (
+const ChevronUp: React.FC<{ size: number; className?: string }> = ({
+  size,
+  className = "",
+}) => (
   <svg
     width={size}
     height={size}

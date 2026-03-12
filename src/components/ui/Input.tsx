@@ -1,8 +1,9 @@
-import React, { forwardRef, useState } from 'react';
-import { motion, AnimatePresence, MotionProps } from 'framer-motion';
-import { cn } from '@/services/libs/cn';
+import React, { forwardRef, useState } from "react";
+import { motion, AnimatePresence, MotionProps } from "framer-motion";
+import { cn } from "@/services/libs/cn";
 
-interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof MotionProps> {
+interface InputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof MotionProps> {
   label?: string;
   error?: string;
   leftIcon?: React.ReactNode;
@@ -11,7 +12,20 @@ interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, k
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, leftIcon, rightIcon, onRightIconClick, className, onFocus, onBlur, ...props }, ref) => {
+  (
+    {
+      label,
+      error,
+      leftIcon,
+      rightIcon,
+      onRightIconClick,
+      className,
+      onFocus,
+      onBlur,
+      ...props
+    },
+    ref,
+  ) => {
     const [isFocused, setIsFocused] = useState(false);
 
     const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -25,7 +39,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     };
 
     return (
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, ease: 'easeOut' }}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+      >
         {label && (
           <motion.label
             htmlFor={props.id}
@@ -47,10 +65,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               transition={{ delay: 0.2, duration: 0.3 }}
               aria-hidden
             >
-              <span className={cn(
-                'h-5 w-5 transition-colors duration-200',
-                isFocused ? 'text-accent' : 'text-text-muted'
-              )}>
+              <span
+                className={cn(
+                  "h-5 w-5 transition-colors duration-200",
+                  isFocused ? "text-accent" : "text-text-muted",
+                )}
+              >
                 {leftIcon}
               </span>
             </motion.div>
@@ -59,17 +79,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <motion.input
             ref={ref}
             className={cn(
-              'relative z-0',
-              'block w-full py-3 border rounded-lg transition-all duration-200',
-              'bg-bg-card',
-              'border-border-primary',
-              'text-text-primary',
-              'placeholder-text-muted',
-              'focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent',
-              leftIcon ? 'pl-10' : 'pl-3',
-              rightIcon ? 'pr-10' : 'pr-3',
-              error && 'border-state-error focus:ring-state-error/50 focus:border-state-error',
-              className
+              "relative z-0",
+              "block w-full py-3 border rounded-lg transition-all duration-200",
+              "bg-bg-card",
+              "border-border-primary",
+              "text-text-primary",
+              "placeholder-text-muted",
+              "focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent",
+              leftIcon ? "pl-10" : "pl-3",
+              rightIcon ? "pr-10" : "pr-3",
+              error &&
+                "border-state-error focus:ring-state-error/50 focus:border-state-error",
+              className,
             )}
             onFocus={handleFocus}
             onBlur={handleBlur}
@@ -109,9 +130,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             <motion.p
               className="mt-2 text-sm text-state-error"
               initial={{ opacity: 0, y: -10, height: 0 }}
-              animate={{ opacity: 1, y: 0, height: 'auto' }}
+              animate={{ opacity: 1, y: 0, height: "auto" }}
               exit={{ opacity: 0, y: -10, height: 0 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
             >
               {error}
             </motion.p>
@@ -119,7 +140,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         </AnimatePresence>
       </motion.div>
     );
-  }
+  },
 );
 
-Input.displayName = 'Input';
+Input.displayName = "Input";

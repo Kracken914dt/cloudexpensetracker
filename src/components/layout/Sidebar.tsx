@@ -1,17 +1,18 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  LayoutDashboard,
+  LogOut,
+  PieChart,
+  Receipt,
+  Settings,
+  X,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuthStore } from "@/context/stores/authStore";
 import { cn } from "@/services/libs/cn";
-import { 
-  LayoutDashboard, 
-  Receipt, 
-  PieChart, 
-  Settings, 
-  LogOut,
-  X
-} from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -34,15 +35,11 @@ const sidebarItems = [
     href: "/dashboard/budget",
     icon: PieChart,
   },
-  {
-    label: "Configuración",
-    href: "/dashboard/settings",
-    icon: Settings,
-  },
 ];
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
+  const logout = useAuthStore((s) => s.logout);
 
   return (
     <>
@@ -63,14 +60,19 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       <motion.aside
         className={cn(
           "fixed inset-y-0 left-0 z-50 w-64 bg-card border-r border-border transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:h-screen",
-          isOpen ? "translate-x-0" : "-translate-x-full"
+          isOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="flex items-center justify-between h-16 px-6 border-b border-border">
-            <span className="text-xl font-bold text-primary">ExpenseTracker</span>
-            <button onClick={onClose} className="md:hidden text-muted-foreground hover:text-foreground">
+            <span className="text-xl font-bold text-primary">
+              ExpenseTracker
+            </span>
+            <button
+              onClick={onClose}
+              className="md:hidden text-muted-foreground hover:text-foreground"
+            >
               <X size={20} />
             </button>
           </div>
@@ -80,7 +82,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
             {sidebarItems.map((item) => {
               const isActive = pathname === item.href;
               const Icon = item.icon;
-              
+
               return (
                 <Link
                   key={item.href}
@@ -90,7 +92,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                     "flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-colors",
                     isActive
                       ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground",
                   )}
                 >
                   <Icon size={20} />
@@ -102,7 +104,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
           {/* Footer */}
           <div className="p-4 border-t border-border">
-            <button className="flex items-center w-full gap-3 px-4 py-3 text-sm font-medium text-destructive hover:bg-destructive/10 rounded-lg transition-colors">
+            <button
+              onClick={logout}
+              className="flex items-center w-full gap-3 px-4 py-3 text-sm font-medium text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
+            >
               <LogOut size={20} />
               Cerrar Sesión
             </button>

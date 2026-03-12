@@ -2,15 +2,15 @@
 
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  X, 
-  AlertTriangle, 
-  AlertCircle, 
-  XCircle, 
-  Info, 
+import {
+  X,
+  AlertTriangle,
+  AlertCircle,
+  XCircle,
+  Info,
   ExternalLink,
   Copy,
-  CheckCircle
+  CheckCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
@@ -19,12 +19,12 @@ export interface ErrorNotificationProps {
   onClose: () => void;
   title?: string;
   message: string;
-  type?: 'error' | 'warning' | 'info';
-  
+  type?: "error" | "warning" | "info";
+
   isDuplicateError?: boolean;
   duplicateTransactionId?: string;
   duplicateTransactionLink?: string;
-  
+
   showCopyButton?: boolean;
   autoClose?: boolean;
   autoCloseDuration?: number;
@@ -38,7 +38,7 @@ const ErrorNotificationModal: React.FC<ErrorNotificationProps> = ({
   onClose,
   title,
   message,
-  type = 'error',
+  type = "error",
   isDuplicateError = false,
   duplicateTransactionId,
   duplicateTransactionLink,
@@ -47,7 +47,7 @@ const ErrorNotificationModal: React.FC<ErrorNotificationProps> = ({
   autoCloseDuration = 5000,
   onAction,
   actionLabel,
-  className = ""
+  className = "",
 }) => {
   const [copied, setCopied] = React.useState(false);
 
@@ -69,29 +69,29 @@ const ErrorNotificationModal: React.FC<ErrorNotificationProps> = ({
 
   const getTypeConfig = () => {
     switch (type) {
-      case 'warning':
+      case "warning":
         return {
           icon: AlertTriangle,
-          iconColor: 'text-yellow-500',
-          bgColor: 'bg-yellow-50 dark:bg-yellow-900/20',
-          borderColor: 'border-yellow-200 dark:border-yellow-700',
-          titleColor: 'text-yellow-800 dark:text-yellow-200'
+          iconColor: "text-yellow-500",
+          bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
+          borderColor: "border-yellow-200 dark:border-yellow-700",
+          titleColor: "text-yellow-800 dark:text-yellow-200",
         };
-      case 'info':
+      case "info":
         return {
           icon: Info,
-          iconColor: 'text-blue-500',
-          bgColor: 'bg-blue-50 dark:bg-blue-900/20',
-          borderColor: 'border-blue-200 dark:border-blue-700',
-          titleColor: 'text-blue-800 dark:text-blue-200'
+          iconColor: "text-blue-500",
+          bgColor: "bg-blue-50 dark:bg-blue-900/20",
+          borderColor: "border-blue-200 dark:border-blue-700",
+          titleColor: "text-blue-800 dark:text-blue-200",
         };
       default:
         return {
           icon: isDuplicateError ? AlertCircle : XCircle,
-          iconColor: 'text-red-500',
-          bgColor: 'bg-red-50 dark:bg-red-900/20',
-          borderColor: 'border-red-200 dark:border-red-700',
-          titleColor: 'text-red-800 dark:text-red-200'
+          iconColor: "text-red-500",
+          bgColor: "bg-red-50 dark:bg-red-900/20",
+          borderColor: "border-red-200 dark:border-red-700",
+          titleColor: "text-red-800 dark:text-red-200",
         };
     }
   };
@@ -103,11 +103,11 @@ const ErrorNotificationModal: React.FC<ErrorNotificationProps> = ({
     if (isDuplicateError) {
       return "Transacción Duplicada";
     }
-    
+
     switch (type) {
-      case 'warning':
+      case "warning":
         return "Advertencia";
-      case 'info':
+      case "info":
         return "Información";
       default:
         return "Error";
@@ -120,7 +120,7 @@ const ErrorNotificationModal: React.FC<ErrorNotificationProps> = ({
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy message:', err);
+      console.error("Failed to copy message:", err);
     }
   };
 
@@ -131,14 +131,14 @@ const ErrorNotificationModal: React.FC<ErrorNotificationProps> = ({
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       } catch (err) {
-        console.error('Failed to copy transaction ID:', err);
+        console.error("Failed to copy transaction ID:", err);
       }
     }
   };
 
   const handleLinkClick = () => {
     if (duplicateTransactionLink) {
-      window.open(duplicateTransactionLink, '_blank');
+      window.open(duplicateTransactionLink, "_blank");
     }
   };
 
@@ -175,12 +175,14 @@ const ErrorNotificationModal: React.FC<ErrorNotificationProps> = ({
                     <IconComponent size={24} />
                   </div>
                   <div>
-                    <h3 className={`text-lg font-semibold ${typeConfig.titleColor}`}>
+                    <h3
+                      className={`text-lg font-semibold ${typeConfig.titleColor}`}
+                    >
                       {title || getDefaultTitle()}
                     </h3>
                   </div>
                 </div>
-                
+
                 <button
                   onClick={onClose}
                   className="flex-shrink-0 text-text-muted hover:text-text-secondary dark:hover:text-text-secondary transition-colors"
@@ -196,7 +198,7 @@ const ErrorNotificationModal: React.FC<ErrorNotificationProps> = ({
                   <p className="text-text-secondary text-sm leading-relaxed">
                     {message}
                   </p>
-                  
+
                   {showCopyButton && (
                     <button
                       onClick={handleCopyMessage}
@@ -218,38 +220,43 @@ const ErrorNotificationModal: React.FC<ErrorNotificationProps> = ({
                 </div>
 
                 {/* Duplicate transaction info */}
-                {isDuplicateError && (duplicateTransactionId || duplicateTransactionLink) && (
-                  <div className="mb-4 p-3 bg-bg-tertiary rounded-lg">
-                    <p className="text-sm font-medium text-text-secondary mb-2">
-                      Transacción existente:
-                    </p>
-                    
-                    {duplicateTransactionId && (
-                      <div className="flex items-center justify-between mb-2">
-                        <code className="text-xs bg-bg-tertiary bg-bg-tertiary px-2 py-1 rounded font-mono">
-                          {duplicateTransactionId}
-                        </code>
+                {isDuplicateError &&
+                  (duplicateTransactionId || duplicateTransactionLink) && (
+                    <div className="mb-4 p-3 bg-bg-tertiary rounded-lg">
+                      <p className="text-sm font-medium text-text-secondary mb-2">
+                        Transacción existente:
+                      </p>
+
+                      {duplicateTransactionId && (
+                        <div className="flex items-center justify-between mb-2">
+                          <code className="text-xs bg-bg-tertiary bg-bg-tertiary px-2 py-1 rounded font-mono">
+                            {duplicateTransactionId}
+                          </code>
+                          <button
+                            onClick={handleCopyTransactionId}
+                            className="text-text-muted hover:text-text-secondary text-text-muted dark:hover:text-text-primary ml-2"
+                            title="Copiar ID"
+                          >
+                            {copied ? (
+                              <CheckCircle size={14} />
+                            ) : (
+                              <Copy size={14} />
+                            )}
+                          </button>
+                        </div>
+                      )}
+
+                      {duplicateTransactionLink && (
                         <button
-                          onClick={handleCopyTransactionId}
-                          className="text-text-muted hover:text-text-secondary text-text-muted dark:hover:text-text-primary ml-2"
-                          title="Copiar ID"
+                          onClick={handleLinkClick}
+                          className="flex items-center space-x-1 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm transition-colors"
                         >
-                          {copied ? <CheckCircle size={14} /> : <Copy size={14} />}
+                          <ExternalLink size={14} />
+                          <span>Ver transacción existente</span>
                         </button>
-                      </div>
-                    )}
-                    
-                    {duplicateTransactionLink && (
-                      <button
-                        onClick={handleLinkClick}
-                        className="flex items-center space-x-1 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm transition-colors"
-                      >
-                        <ExternalLink size={14} />
-                        <span>Ver transacción existente</span>
-                      </button>
-                    )}
-                  </div>
-                )}
+                      )}
+                    </div>
+                  )}
 
                 {/* Auto close indicator */}
                 {autoClose && (
@@ -257,13 +264,17 @@ const ErrorNotificationModal: React.FC<ErrorNotificationProps> = ({
                     <motion.div
                       initial={{ width: "100%" }}
                       animate={{ width: "0%" }}
-                      transition={{ duration: autoCloseDuration / 1000, ease: "linear" }}
+                      transition={{
+                        duration: autoCloseDuration / 1000,
+                        ease: "linear",
+                      }}
                       className="h-1 bg-bg-tertiary bg-bg-tertiary rounded-full overflow-hidden"
                     >
                       <div className="h-full bg-bg-tertiary bg-bg-tertiary"></div>
                     </motion.div>
                     <p className="text-xs text-text-muted mt-1">
-                      Se cerrará automáticamente en {Math.ceil(autoCloseDuration / 1000)}s
+                      Se cerrará automáticamente en{" "}
+                      {Math.ceil(autoCloseDuration / 1000)}s
                     </p>
                   </div>
                 )}
@@ -282,13 +293,13 @@ const ErrorNotificationModal: React.FC<ErrorNotificationProps> = ({
                       {actionLabel}
                     </Button>
                   )}
-                  
+
                   <Button
-                    variant={type === 'error' ? 'primary' : 'secondary'}
+                    variant={type === "error" ? "primary" : "secondary"}
                     size="sm"
                     onClick={onClose}
                   >
-                    {isDuplicateError ? 'Entendido' : 'Cerrar'}
+                    {isDuplicateError ? "Entendido" : "Cerrar"}
                   </Button>
                 </div>
               </div>
@@ -306,56 +317,65 @@ export const useErrorNotification = () => {
     props: Partial<ErrorNotificationProps>;
   }>({
     isOpen: false,
-    props: {}
+    props: {},
   });
 
-  const showError = React.useCallback((props: Omit<ErrorNotificationProps, 'isOpen' | 'onClose'>) => {
-    setNotification({
-      isOpen: true,
-      props
-    });
-  }, []);
+  const showError = React.useCallback(
+    (props: Omit<ErrorNotificationProps, "isOpen" | "onClose">) => {
+      setNotification({
+        isOpen: true,
+        props,
+      });
+    },
+    [],
+  );
 
-  const showDuplicateError = React.useCallback((
-    message: string,
-    transactionId?: string,
-    transactionLink?: string,
-    title?: string
-  ) => {
-    setNotification({
-      isOpen: true,
-      props: {
-        type: 'error',
-        title: title || 'Transacción Duplicada',
-        message,
-        isDuplicateError: true,
-        duplicateTransactionId: transactionId,
-        duplicateTransactionLink: transactionLink,
-      }
-    });
-  }, []);
+  const showDuplicateError = React.useCallback(
+    (
+      message: string,
+      transactionId?: string,
+      transactionLink?: string,
+      title?: string,
+    ) => {
+      setNotification({
+        isOpen: true,
+        props: {
+          type: "error",
+          title: title || "Transacción Duplicada",
+          message,
+          isDuplicateError: true,
+          duplicateTransactionId: transactionId,
+          duplicateTransactionLink: transactionLink,
+        },
+      });
+    },
+    [],
+  );
 
   const hideNotification = React.useCallback(() => {
-    setNotification(prev => ({
+    setNotification((prev) => ({
       ...prev,
-      isOpen: false
+      isOpen: false,
     }));
   }, []);
 
-  const NotificationComponent = React.useCallback(() => (
-    <ErrorNotificationModal
-      {...notification.props}
-      isOpen={notification.isOpen}
-      onClose={hideNotification}
-      message={notification.props.message ?? ""}
-    />
-  ), [notification, hideNotification]);
+  const NotificationComponent = React.useCallback(
+    () => (
+      <ErrorNotificationModal
+        {...notification.props}
+        isOpen={notification.isOpen}
+        onClose={hideNotification}
+        message={notification.props.message ?? ""}
+      />
+    ),
+    [notification, hideNotification],
+  );
 
   return {
     showError,
     showDuplicateError,
     hideNotification,
-    NotificationComponent
+    NotificationComponent,
   };
 };
 

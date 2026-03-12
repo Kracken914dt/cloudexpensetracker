@@ -1,8 +1,17 @@
 import { ApiService } from "@/services/libs/ApiService";
-import type { IExpense, ICreateExpenseInput, IUpdateExpenseInput, IDashboardData } from "@/types/expense";
+import type {
+  IExpense,
+  ICreateExpenseInput,
+  IUpdateExpenseInput,
+  IDashboardData,
+} from "@/types/expense";
 
 export class ExpenseService {
-  static async getAll(params?: { category?: string; from?: string; to?: string }): Promise<IExpense[]> {
+  static async getAll(params?: {
+    category?: string;
+    from?: string;
+    to?: string;
+  }): Promise<IExpense[]> {
     return ApiService.get<IExpense[]>("/api/expenses", { params });
   }
 
@@ -10,7 +19,10 @@ export class ExpenseService {
     return ApiService.post<IExpense>("/api/expenses", data);
   }
 
-  static async update(id: string, data: IUpdateExpenseInput): Promise<IExpense> {
+  static async update(
+    id: string,
+    data: IUpdateExpenseInput,
+  ): Promise<IExpense> {
     return ApiService.put<IExpense>(`/api/expenses/${id}`, data);
   }
 

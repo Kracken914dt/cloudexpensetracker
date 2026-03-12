@@ -14,9 +14,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
       <div className="flex flex-col flex-1 w-full min-w-0 transition-all duration-300 ease-in-out md:ml-0">
         <Header onMenuClick={() => setSidebarOpen(true)} />
         <main className="flex-1 p-6 overflow-y-auto">
-          <div className="mx-auto max-w-7xl">
-            {children}
-          </div>
+          <div className="mx-auto max-w-7xl">{children}</div>
         </main>
       </div>
     </div>

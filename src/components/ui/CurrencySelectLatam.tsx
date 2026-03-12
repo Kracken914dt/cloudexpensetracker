@@ -468,7 +468,7 @@ export const getCurrencySymbolByCode = (code: string): string => {
 };
 
 export const getCurrencyTypeByCode = (
-  code: string
+  code: string,
 ): "fiat" | "crypto" | "unknown" => {
   const currency = allCurrencies.find((c) => c.code === code);
   return currency ? currency.type : "unknown";

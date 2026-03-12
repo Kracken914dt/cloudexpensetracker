@@ -18,7 +18,9 @@ export function Header({ onMenuClick }: HeaderProps) {
         >
           <Menu size={24} />
         </button>
-        <h1 className="text-xl font-semibold text-foreground hidden sm:block">Dashboard</h1>
+        <h1 className="text-xl font-semibold text-foreground hidden sm:block">
+          Dashboard
+        </h1>
       </div>
 
       <div className="flex items-center gap-4">
@@ -27,7 +29,9 @@ export function Header({ onMenuClick }: HeaderProps) {
           <div className="w-8 h-8 flex items-center justify-center rounded-full bg-primary text-primary-foreground">
             <User size={16} />
           </div>
-          <span className="text-sm font-medium pr-2 hidden sm:block">Usuario</span>
+          <span className="text-sm font-medium pr-2 hidden sm:block">
+            Usuario
+          </span>
         </div>
       </div>
     </header>

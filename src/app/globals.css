@@ -21,7 +21,7 @@
   --input: #e4e4e7;
   --ring: #18181b;
   --radius: 0.5rem;
-  
+
   /* Custom names used in components */
   --bg-card: #ffffff;
   --bg-secondary: #f4f4f5;
@@ -31,7 +31,7 @@
   --text-muted: #a1a1aa;
   --border-primary: #e4e4e7;
   --border-secondary: #f4f4f5;
-  
+
   /* Button specific */
   --accent-hover: #27272a;
   --state-success: #22c55e;
@@ -68,7 +68,7 @@
   --text-muted: #71717a;
   --border-primary: #27272a;
   --border-secondary: #3f3f46;
-  
+
   /* Button specific */
   --accent-hover: #e4e4e7;
   --state-success: #16a34a;
@@ -95,7 +95,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  
+
   /* Custom names mapping */
   --color-bg-card: var(--bg-card);
   --color-bg-secondary: var(--bg-secondary);
@@ -105,7 +105,7 @@
   --color-text-muted: var(--text-muted);
   --color-border-primary: var(--border-primary);
   --color-border-secondary: var(--border-secondary);
-  
+
   --color-accent-hover: var(--accent-hover);
   --color-state-success: var(--state-success);
   --color-state-error: var(--state-error);
@@ -113,7 +113,7 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
-  
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

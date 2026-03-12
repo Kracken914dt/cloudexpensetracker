@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { cn } from '@/services/libs/cn';
+import React from "react";
+import { motion } from "framer-motion";
+import { cn } from "@/services/libs/cn";
 
 interface TableProps {
   className?: string;
@@ -38,7 +38,9 @@ interface TableCellProps {
 export const Table: React.FC<TableProps> = ({ className, children }) => {
   return (
     <div className="w-full overflow-x-auto">
-      <table className={cn('min-w-full divide-y divide-border-secondary', className)}>
+      <table
+        className={cn("min-w-full divide-y divide-border-secondary", className)}
+      >
         {children}
       </table>
     </div>
@@ -46,11 +48,7 @@ export const Table: React.FC<TableProps> = ({ className, children }) => {
 };
 
 export const TableHeader: React.FC<TableHeaderProps> = ({ children }) => {
-  return (
-    <thead className="bg-bg-secondary/50">
-      {children}
-    </thead>
-  );
+  return <thead className="bg-bg-secondary/50">{children}</thead>;
 };
 
 export const TableBody: React.FC<TableBodyProps> = ({ children }) => {
@@ -61,10 +59,17 @@ export const TableBody: React.FC<TableBodyProps> = ({ children }) => {
   );
 };
 
-export const TableRow: React.FC<TableRowProps> = ({ className, children, onClick }) => {
+export const TableRow: React.FC<TableRowProps> = ({
+  className,
+  children,
+  onClick,
+}) => {
   return (
     <motion.tr
-      className={cn('hover:bg-bg-secondary/50 transition-colors duration-150', className)}
+      className={cn(
+        "hover:bg-bg-secondary/50 transition-colors duration-150",
+        className,
+      )}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.2 }}
@@ -75,12 +80,16 @@ export const TableRow: React.FC<TableRowProps> = ({ className, children, onClick
   );
 };
 
-export const TableHead: React.FC<TableHeadProps> = ({ className, style, children }) => {
+export const TableHead: React.FC<TableHeadProps> = ({
+  className,
+  style,
+  children,
+}) => {
   return (
     <th
       className={cn(
-        'px-4 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider',
-        className
+        "px-4 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider",
+        className,
       )}
       style={style}
     >
@@ -89,10 +98,16 @@ export const TableHead: React.FC<TableHeadProps> = ({ className, style, children
   );
 };
 
-export const TableCell: React.FC<TableCellProps> = ({ className, style, children, rowSpan, colSpan }) => {
+export const TableCell: React.FC<TableCellProps> = ({
+  className,
+  style,
+  children,
+  rowSpan,
+  colSpan,
+}) => {
   return (
     <td
-      className={cn('px-4 py-4 text-sm text-text-primary', className)}
+      className={cn("px-4 py-4 text-sm text-text-primary", className)}
       style={style}
       rowSpan={rowSpan}
       colSpan={colSpan}

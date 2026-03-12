@@ -5,7 +5,7 @@ import { handleApiError } from "./ErrorHandler";
 export class ApiService {
   static async get<T>(
     endpoint: string,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<T> {
     try {
       const response = await baseApi.get<T>(endpoint, config);
@@ -18,7 +18,7 @@ export class ApiService {
   static async post<T>(
     endpoint: string,
     data?: unknown,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<T> {
     try {
       const response = await baseApi.post<T>(endpoint, data, config);
@@ -31,7 +31,7 @@ export class ApiService {
   static async put<T>(
     endpoint: string,
     data?: unknown,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<T> {
     try {
       const response = await baseApi.put<T>(endpoint, data, config);
@@ -44,7 +44,7 @@ export class ApiService {
   static async patch<T>(
     endpoint: string,
     data?: unknown,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<T> {
     try {
       const response = await baseApi.patch<T>(endpoint, data, config);
@@ -56,7 +56,7 @@ export class ApiService {
 
   static async delete<T>(
     endpoint: string,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<T> {
     try {
       const response = await baseApi.delete<T>(endpoint, config);

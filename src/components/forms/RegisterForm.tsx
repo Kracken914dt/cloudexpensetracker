@@ -31,7 +31,7 @@ export function RegisterForm() {
     } catch (err: any) {
       const status = err?.response?.status || err?.status;
       const message = err?.response?.data?.message || err?.message;
-      
+
       if (status === 400) {
         addToast(message ?? "Datos inválidos. Revisa los campos.", "error");
       } else if (status === 409) {
@@ -79,7 +79,13 @@ export function RegisterForm() {
         label="Contraseña"
         placeholder="••••••••"
         leftIcon={<Lock className="w-4 h-4" />}
-        rightIcon={showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+        rightIcon={
+          showPassword ? (
+            <EyeOff className="w-4 h-4" />
+          ) : (
+            <Eye className="w-4 h-4" />
+          )
+        }
         onRightIconClick={() => setShowPassword((v) => !v)}
         error={errors.password?.message}
         {...register("password", {

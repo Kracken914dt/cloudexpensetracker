@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { motion } from "framer-motion";
 
 interface FormSectionProps {
@@ -7,10 +7,10 @@ interface FormSectionProps {
   delay?: number;
 }
 
-export const FormSection: React.FC<FormSectionProps> = ({ 
-  title, 
-  children, 
-  delay = 0 
+export const FormSection: React.FC<FormSectionProps> = ({
+  title,
+  children,
+  delay = 0,
 }) => {
   return (
     <motion.div
@@ -19,7 +19,7 @@ export const FormSection: React.FC<FormSectionProps> = ({
       transition={{
         duration: 0.5,
         delay: delay,
-        ease: "easeOut"
+        ease: "easeOut",
       }}
     >
       <motion.h3
@@ -29,7 +29,7 @@ export const FormSection: React.FC<FormSectionProps> = ({
         transition={{
           delay: delay + 0.1,
           duration: 0.4,
-          ease: "easeOut"
+          ease: "easeOut",
         }}
       >
         {title}
@@ -39,7 +39,7 @@ export const FormSection: React.FC<FormSectionProps> = ({
         animate={{ opacity: 1 }}
         transition={{
           delay: delay + 0.2,
-          duration: 0.4
+          duration: 0.4,
         }}
       >
         {children}

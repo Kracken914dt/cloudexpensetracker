@@ -1,11 +1,15 @@
-import React from 'react';
-import { motion, MotionProps } from 'framer-motion';
-import { Loader2 } from 'lucide-react';
-import { cn } from '@/services/libs/cn';
+import React from "react";
+import { motion, MotionProps } from "framer-motion";
+import { Loader2 } from "lucide-react";
+import { cn } from "@/services/libs/cn";
 
-interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof MotionProps> {
-  variant?: 'primary' | 'secondary' | 'ghost' | 'error'|'accept';
-  size?: 'sm' | 'md' | 'lg';
+interface ButtonProps
+  extends Omit<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    keyof MotionProps
+  > {
+  variant?: "primary" | "secondary" | "ghost" | "error" | "accept";
+  size?: "sm" | "md" | "lg";
   loading?: boolean;
   fullWidth?: boolean;
   icon?: React.ReactNode;
@@ -13,22 +17,27 @@ interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>
 }
 
 const variants = {
-  primary: 'bg-accent hover:cursor-pointer hover:bg-accent-hover text-white border-transparent',
-  accept: 'bg-state-success hover:cursor-pointer hover:bg-state-success/80 text-white border-transparent',
-  error: 'bg-state-error hover:cursor-pointer hover:bg-state-error/80 text-white border-transparent',
-  secondary: 'bg-bg-secondary hover:bg-bg-tertiary text-text-primary border-border-primary',
-  ghost: 'bg-transparent hover:bg-bg-tertiary/70 text-text-secondary border-transparent'
+  primary:
+    "bg-accent hover:cursor-pointer hover:bg-accent-hover text-white border-transparent",
+  accept:
+    "bg-state-success hover:cursor-pointer hover:bg-state-success/80 text-white border-transparent",
+  error:
+    "bg-state-error hover:cursor-pointer hover:bg-state-error/80 text-white border-transparent",
+  secondary:
+    "bg-bg-secondary hover:bg-bg-tertiary text-text-primary border-border-primary",
+  ghost:
+    "bg-transparent hover:bg-bg-tertiary/70 text-text-secondary border-transparent",
 };
 
 const sizes = {
-  sm: 'px-3 py-2 text-sm',
-  md: 'px-4 py-3 text-base',
-  lg: 'px-6 py-4 text-lg'
+  sm: "px-3 py-2 text-sm",
+  md: "px-4 py-3 text-base",
+  lg: "px-6 py-4 text-lg",
 };
 
 export const Button: React.FC<ButtonProps> = ({
-  variant = 'primary',
-  size = 'md',
+  variant = "primary",
+  size = "md",
   loading = false,
   fullWidth = false,
   icon,
@@ -45,14 +54,14 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={disabled || loading}
       onClick={onClick}
       className={cn(
-        'inline-flex items-center justify-center font-medium rounded-lg border transition-all text-center duration-200 ease-out',
-        'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent/50',
-        'focus:ring-offset-bg-primary',
-        'disabled:opacity-60 disabled:bg-bg-tertiary! disabled:text-text-muted! disabled:cursor-not-allowed',
+        "inline-flex items-center justify-center font-medium rounded-lg border transition-all text-center duration-200 ease-out",
+        "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent/50",
+        "focus:ring-offset-bg-primary",
+        "disabled:opacity-60 disabled:bg-bg-tertiary! disabled:text-text-muted! disabled:cursor-not-allowed",
         variants[variant],
         sizes[size],
-        fullWidth && 'w-full',
-        className
+        fullWidth && "w-full",
+        className,
       )}
       whileHover={!disabled && !loading ? { scale: 1.01 } : {}}
       whileTap={!disabled && !loading ? { scale: 0.99 } : {}}
@@ -60,7 +69,7 @@ export const Button: React.FC<ButtonProps> = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{
         duration: 0.3,
-        ease: "easeOut"
+        ease: "easeOut",
       }}
       {...props}
     >

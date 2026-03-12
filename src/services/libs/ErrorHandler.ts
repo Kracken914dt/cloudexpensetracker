@@ -1,7 +1,7 @@
 export function handleApiError(error: any): never {
   if (error.response) {
     const customError = new Error(
-      error.response.data?.message ?? "Error del servidor"
+      error.response.data?.message ?? "Error del servidor",
     ) as any;
     customError.status = error.response.status;
     customError.statusCode = error.response.status;
@@ -18,14 +18,14 @@ export function handleApiError(error: any): never {
 
   if (error.request) {
     const networkError = new Error(
-      "No se recibió respuesta del servidor"
+      "No se recibió respuesta del servidor",
     ) as any;
     networkError.isNetworkError = true;
     throw networkError;
   }
 
   const configError = new Error(
-    "Error inesperado al preparar la petición"
+    "Error inesperado al preparar la petición",
   ) as any;
   if (
     error.message?.includes("Too Many Requests") ||

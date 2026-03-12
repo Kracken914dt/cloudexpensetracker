@@ -1,8 +1,8 @@
 "use client";
-import React from 'react';
-import { AlertTriangle, Trash2 } from 'lucide-react';
-import { Modal } from '@/components/ui/Modal';
-import { Button } from '@/components/ui/Button';
+import React from "react";
+import { AlertTriangle, Trash2 } from "lucide-react";
+import { Modal } from "@/components/ui/Modal";
+import { Button } from "@/components/ui/Button";
 
 interface DeleteConfirmationModalProps {
   isOpen: boolean;
@@ -12,13 +12,9 @@ interface DeleteConfirmationModalProps {
   isDeleting?: boolean;
 }
 
-export const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
-  isOpen,
-  onClose,
-  onConfirm,
-  transactionId,
-  isDeleting = false
-}) => {
+export const DeleteConfirmationModal: React.FC<
+  DeleteConfirmationModalProps
+> = ({ isOpen, onClose, onConfirm, transactionId, isDeleting = false }) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -70,7 +66,7 @@ export const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = (
             className="bg-red-600 hover:bg-red-700 text-white hover:text-white border-red-600 hover:border-red-700"
           >
             <Trash2 size={16} className="mr-2" />
-            {isDeleting ? 'Eliminando...' : 'Eliminar Transacción'}
+            {isDeleting ? "Eliminando..." : "Eliminar Transacción"}
           </Button>
         </div>
       </div>

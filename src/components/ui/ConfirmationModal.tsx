@@ -1,10 +1,10 @@
 "use client";
-import React from 'react';
-import { AlertTriangle, HelpCircle, Info } from 'lucide-react';
-import { Modal } from '@/components/ui/Modal';
-import { Button } from '@/components/ui/Button';
+import React from "react";
+import { AlertTriangle, HelpCircle, Info } from "lucide-react";
+import { Modal } from "@/components/ui/Modal";
+import { Button } from "@/components/ui/Button";
 
-export type ConfirmationType = 'warning' | 'info' | 'question';
+export type ConfirmationType = "warning" | "info" | "question";
 
 interface ConfirmationModalProps {
   isOpen: boolean;
@@ -26,32 +26,35 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   message,
   confirmText = "Confirmar",
   cancelText = "Cancelar",
-  type = 'question',
-  isProcessing = false
+  type = "question",
+  isProcessing = false,
 }) => {
   const getIconConfig = () => {
     switch (type) {
-      case 'warning':
+      case "warning":
         return {
           icon: AlertTriangle,
-          bgColor: 'bg-yellow-100 dark:bg-yellow-900/20',
-          iconColor: 'text-yellow-600 dark:text-yellow-400',
-          buttonColor: 'bg-yellow-600 hover:bg-yellow-700 border-yellow-600 hover:border-yellow-700'
+          bgColor: "bg-yellow-100 dark:bg-yellow-900/20",
+          iconColor: "text-yellow-600 dark:text-yellow-400",
+          buttonColor:
+            "bg-yellow-600 hover:bg-yellow-700 border-yellow-600 hover:border-yellow-700",
         };
-      case 'info':
+      case "info":
         return {
           icon: Info,
-          bgColor: 'bg-blue-100 dark:bg-blue-900/20',
-          iconColor: 'text-blue-600 dark:text-blue-400',
-          buttonColor: 'bg-blue-600 hover:bg-blue-700 border-blue-600 hover:border-blue-700'
+          bgColor: "bg-blue-100 dark:bg-blue-900/20",
+          iconColor: "text-blue-600 dark:text-blue-400",
+          buttonColor:
+            "bg-blue-600 hover:bg-blue-700 border-blue-600 hover:border-blue-700",
         };
-      case 'question':
+      case "question":
       default:
         return {
           icon: HelpCircle,
-          bgColor: 'bg-bg-secondary',
-          iconColor: 'text-text-secondary',
-          buttonColor: 'bg-blue-600 hover:bg-blue-700 border-blue-600 hover:border-blue-700'
+          bgColor: "bg-bg-secondary",
+          iconColor: "text-text-secondary",
+          buttonColor:
+            "bg-blue-600 hover:bg-blue-700 border-blue-600 hover:border-blue-700",
         };
     }
   };
@@ -69,15 +72,15 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     >
       <div className="space-y-4">
         {/* Icono */}
-        <div className={`flex items-center justify-center w-16 h-16 mx-auto rounded-full ${config.bgColor}`}>
+        <div
+          className={`flex items-center justify-center w-16 h-16 mx-auto rounded-full ${config.bgColor}`}
+        >
           <Icon className={`w-8 h-8 ${config.iconColor}`} />
         </div>
 
         {/* Mensaje */}
         <div className="text-center">
-          <p className="text-sm text-text-secondary">
-            {message}
-          </p>
+          <p className="text-sm text-text-secondary">{message}</p>
         </div>
 
         {/* Botones de acción */}

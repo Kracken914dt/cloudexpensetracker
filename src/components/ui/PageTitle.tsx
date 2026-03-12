@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 
 interface PageTitleProps {
   title: string;
@@ -9,10 +9,10 @@ interface PageTitleProps {
   actions?: React.ReactNode;
 }
 
-export const PageTitle: React.FC<PageTitleProps> = ({ 
-  title, 
-  subtitle, 
-  actions 
+export const PageTitle: React.FC<PageTitleProps> = ({
+  title,
+  subtitle,
+  actions,
 }) => {
   return (
     <div className="mb-6">

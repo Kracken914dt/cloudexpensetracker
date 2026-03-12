@@ -31,9 +31,15 @@ export function LoginForm() {
     } catch (err: any) {
       const status = err?.response?.status || err?.status;
       if (status === 401) {
-        addToast("Credenciales inválidas. Verifica tu email y contraseña.", "error");
+        addToast(
+          "Credenciales inválidas. Verifica tu email y contraseña.",
+          "error",
+        );
       } else if (status === 429) {
-        addToast("Demasiados intentos. Intenta nuevamente en unos minutos.", "error");
+        addToast(
+          "Demasiados intentos. Intenta nuevamente en unos minutos.",
+          "error",
+        );
       } else {
         addToast("Error del servidor. Intenta más tarde.", "error");
       }
@@ -64,7 +70,13 @@ export function LoginForm() {
         label="Contraseña"
         placeholder="••••••••"
         leftIcon={<Lock className="w-4 h-4" />}
-        rightIcon={showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+        rightIcon={
+          showPassword ? (
+            <EyeOff className="w-4 h-4" />
+          ) : (
+            <Eye className="w-4 h-4" />
+          )
+        }
         onRightIconClick={() => setShowPassword((v) => !v)}
         error={errors.password?.message}
         {...register("password", {
