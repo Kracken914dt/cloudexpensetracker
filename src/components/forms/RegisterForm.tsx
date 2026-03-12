@@ -7,12 +7,13 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useAuthStore } from "@/context/stores/authStore";
+import { useToast } from "@/context/ToastContext";
 import { AuthService } from "@/services/auth/AuthService";
 import type { IRegisterInput } from "@/types/auth";
 
 export function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const [serverError, setServerError] = useState<string | null>(null);
+  const { addToast } = useToast();
   const login = useAuthStore((s) => s.login);
 
   const {
@@ -22,19 +23,21 @@ export function RegisterForm() {
   } = useForm<IRegisterInput>();
 
   const onSubmit = async (data: IRegisterInput) => {
-    setServerError(null);
     try {
       const res = await AuthService.register(data);
       login(res.token, res.user);
+      addToast("Cuenta creada exitosamente", "success");
       window.location.assign("/dashboard");
-    } catch (err: unknown) {
-      const error = err as { status?: number; message?: string };
-      if (error.status === 400) {
-        setServerError(error.message ?? "Datos inválidos. Revisa los campos.");
-      } else if (error.status === 409) {
-        setServerError("Ya existe una cuenta con ese correo electrónico.");
+    } catch (err: any) {
+      const status = err?.response?.status || err?.status;
+      const message = err?.response?.data?.message || err?.message;
+      
+      if (status === 400) {
+        addToast(message ?? "Datos inválidos. Revisa los campos.", "error");
+      } else if (status === 409) {
+        addToast("Ya existe una cuenta con ese correo electrónico.", "error");
       } else {
-        setServerError("Error del servidor. Intenta más tarde.");
+        addToast("Error del servidor. Intenta más tarde.", "error");
       }
     }
   };
@@ -85,11 +88,7 @@ export function RegisterForm() {
         })}
       />
 
-      {serverError && (
-        <p className="text-sm text-red-500 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
-          {serverError}
-        </p>
-      )}
+      {/* Server error removed in favor of Toast */}
 
       <Button type="submit" fullWidth loading={isSubmitting} size="lg">
         {isSubmitting ? "Creando cuenta..." : "Crear cuenta"}

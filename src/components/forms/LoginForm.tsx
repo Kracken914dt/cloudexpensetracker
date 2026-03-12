@@ -7,12 +7,13 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useAuthStore } from "@/context/stores/authStore";
+import { useToast } from "@/context/ToastContext";
 import { AuthService } from "@/services/auth/AuthService";
 import type { ILoginInput } from "@/types/auth";
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const [serverError, setServerError] = useState<string | null>(null);
+  const { addToast } = useToast();
   const login = useAuthStore((s) => s.login);
 
   const {
@@ -22,19 +23,19 @@ export function LoginForm() {
   } = useForm<ILoginInput>();
 
   const onSubmit = async (data: ILoginInput) => {
-    setServerError(null);
     try {
       const res = await AuthService.login(data);
       login(res.token, res.user);
+      addToast("Inicio de sesión exitoso", "success");
       window.location.assign("/dashboard");
-    } catch (err: unknown) {
-      const error = err as { status?: number; message?: string };
-      if (error.status === 401) {
-        setServerError("Credenciales inválidas. Verifica tu email y contraseña.");
-      } else if (error.status === 429) {
-        setServerError("Demasiados intentos. Intenta nuevamente en unos minutos.");
+    } catch (err: any) {
+      const status = err?.response?.status || err?.status;
+      if (status === 401) {
+        addToast("Credenciales inválidas. Verifica tu email y contraseña.", "error");
+      } else if (status === 429) {
+        addToast("Demasiados intentos. Intenta nuevamente en unos minutos.", "error");
       } else {
-        setServerError("Error del servidor. Intenta más tarde.");
+        addToast("Error del servidor. Intenta más tarde.", "error");
       }
     }
   };
@@ -72,11 +73,7 @@ export function LoginForm() {
         })}
       />
 
-      {serverError && (
-        <p className="text-sm text-red-500 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
-          {serverError}
-        </p>
-      )}
+      {/* Server error removed in favor of Toast */}
 
       <Button type="submit" fullWidth loading={isSubmitting} size="lg">
         {isSubmitting ? "Iniciando sesión..." : "Iniciar sesión"}
